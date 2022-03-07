@@ -1,0 +1,84 @@
+name: OpenSwitcher win build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        include: [
+          { msystem: MINGW64, arch: x86_64 },
+        ]
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      ARCH: ${{ matrix.arch }}
+    steps:          
+      - name: Clone this repo
+        uses: actions/checkout@v2
+        with:
+          path: buildsrc
+
+      - name: Setup msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          update: true
+          install: >-
+            mingw-w64-x86_64-python
+            mingw-w64-x86_64-gettext
+            mingw-w64-x86_64-gspell
+            mingw-w64-x86_64-gtk3
+            mingw-w64-x86_64-python-chardet
+            mingw-w64-x86_64-python-pip
+            mingw-w64-x86_64-python-gobject
+            mingw-w64-x86_64-libusb
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-libhandy
+            mingw-w64-x86_64-python-cx-freeze
+            mingw-w64-x86_64-python-pywin32
+            git
+
+      - name: Clone private repo
+        run: git clone "https://git.sr.ht/~martijnbraam/pyatem"
+
+      - name: Add more depends from pip
+        run: |
+          pip install pyusb zeroconf
+
+      - name: Build installer
+        run: |
+          cd pyatem
+          python3 setup.py build
+          python3 setup.py install
+          cd gtk_switcher
+          glib-compile-resources atem.gresource.xml
+          cd ..
+          cp data/nl.brixit.Switcher.gschema.xml /mingw64/share/glib-2.0/schemas
+          glib-compile-schemas /mingw64/share/glib-2.0/schemas
+          cp -rv ../buildsrc/windows .
+          cp windows/launcher gtk_switcher/switcher-control
+          python3 windows/setup.py bdist_msi
+          python3 windows/setup.py build_exe
+          echo "--[Build done]--"
+          ls -lah build/*
+          mv build/exe.* build/openswitcher
+
+      - name: Archive installer artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-${{ matrix.arch }}-installer
+          path: pyatem/dist
+
+      - name: Archive package artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-${{ matrix.arch }}-package
+          path: pyatem/build/openswitcher

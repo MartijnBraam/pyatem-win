@@ -65,8 +65,9 @@ jobs:
           glib-compile-schemas /mingw64/share/glib-2.0/schemas
           cp -rv ../buildsrc/windows .
           cp windows/launcher gtk_switcher/switcher-control
-          python3 windows/setup.py bdist_msi
-          python3 windows/setup.py build_exe
+          cd windows
+          python3 setup.py bdist_msi
+          python3 setup.py build_exe
           echo "--[Build done]--"
           ls -lah build/*
           mv build/exe.* build/openswitcher
@@ -75,10 +76,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: windows-${{ matrix.arch }}-installer
-          path: pyatem/dist
+          path: pyatem/windows/dist
 
       - name: Archive package artifacts
         uses: actions/upload-artifact@v2
         with:
           name: windows-${{ matrix.arch }}-package
-          path: pyatem/build/openswitcher
+          path: pyatem/windows/build/openswitcher

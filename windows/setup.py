@@ -16,7 +16,7 @@ if sys.platform == "win32":
 else:
     raise RuntimeError("Only Windows is supported")
 
-include_files = [('gtk_switcher/atem.gresource', 'atem.gresource')]
+include_files = [('../gtk_switcher/atem.gresource', 'atem.gresource')]
 plugin_packages = []
 
 gtk_version = 3

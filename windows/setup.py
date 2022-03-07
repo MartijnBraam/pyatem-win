@@ -45,6 +45,7 @@ def add_gtk():
     # This also includes all dlls required by GTK
     add_files_by_pattern("bin", "libgtk-" + str(gtk_version), ".dll", output_path="lib")
     add_files_by_pattern("bin", "libhandy-", ".dll", output_path="lib")
+    add_files_by_pattern("bin", "libusb-1", ".dll", output_path="lib")
 
     include_files.append((os.path.join(sys_base, "share/glib-2.0/schemas/gschemas.compiled"),
                          "share/glib-2.0/schemas/gschemas.compiled"))

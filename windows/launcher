@@ -5,7 +5,7 @@ import sys
 import signal
 import gettext
 
-VERSION = '0.5.0'
+VERSION = '0.5.1'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 if __name__ == '__main__':

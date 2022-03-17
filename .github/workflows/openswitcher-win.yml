@@ -2,9 +2,8 @@ name: OpenSwitcher win build
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ master ]
+    tags: ['*']
   workflow_dispatch:
 
 jobs:

@@ -3,7 +3,6 @@ name: OpenSwitcher win build
 on:
   push:
     branches: [ master ]
-    tags: ['*']
   workflow_dispatch:
 
 jobs:

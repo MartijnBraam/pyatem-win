@@ -3,13 +3,15 @@
 import os
 import sys
 import signal
-import locale
 import gettext
+from ctypes import cdll
 
 VERSION = '0.5.1'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-locale.bindtextdomain("openswitcher", os.path.join(pkgdir, 'po'))
+libintl = cdll.intl
+libintl.bindtextdomain("openswitcher", os.path.join(pkgdir, 'po'))
+libintl.bind_textdomain_codeset("openswitcher", 'UTF-8')
 gettext.install("openswitcher", os.path.join(pkgdir, 'po'))
 
 if __name__ == '__main__':

@@ -3,10 +3,14 @@
 import os
 import sys
 import signal
+import locale
 import gettext
 
 VERSION = '0.5.1'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+locale.bindtextdomain("openswitcher", os.path.join(pkgdir, 'po'))
+gettext.install("openswitcher", os.path.join(pkgdir, 'po'))
 
 if __name__ == '__main__':
     import gi

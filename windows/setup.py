@@ -126,7 +126,7 @@ add_locales()
 setup(
     name="openswitcher",
     author="Martijn Braam <martijn@brixit.nl>",
-    version="0.5.1",
+    version="0.5.2",
     options={
         "build_exe": dict(
             packages=["gi"] + plugin_packages,
@@ -138,7 +138,7 @@ setup(
         "bdist_msi": dict(
             all_users=True,
             install_icon=os.path.join(src_path, "windows/openswitcher.ico"),
-            target_name="OpenSwitcher-0.5.1.msi",
+            target_name="OpenSwitcher-0.5.2.msi",
             upgrade_code="{1ad65c6a-3492-4940-985f-04d11a28095e}"
         )
     },

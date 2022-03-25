@@ -57,11 +57,10 @@ jobs:
           python3 setup.py build
           python3 setup.py install
           echo "making locales"
-          mkdir -p /mingw64/po/{en,nl,tr}/LC_MESSAGES
-          msgfmt -o /mingw64/po/en/LC_MESSAGES/openswitcher.mo po/en.po
-          msgfmt -o /mingw64/po/nl/LC_MESSAGES/openswitcher.mo po/nl.po
-          msgfmt -o /mingw64/po/tr/LC_MESSAGES/openswitcher.mo po/tr.po
-          ls -lah /mingw64/po
+          mkdir -pv /mingw64/share/locale/{en,nl,tr}/LC_MESSAGES
+          msgfmt -v -o /mingw64/share/locale/en/LC_MESSAGES/openswitcher.mo po/en.po
+          msgfmt -v -o /mingw64/share/locale/nl/LC_MESSAGES/openswitcher.mo po/nl.po
+          msgfmt -v -o /mingw64/share/locale/tr/LC_MESSAGES/openswitcher.mo po/tr.po
           cd gtk_switcher
           glib-compile-resources atem.gresource.xml
           cd ..

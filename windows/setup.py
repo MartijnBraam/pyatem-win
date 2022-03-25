@@ -108,8 +108,9 @@ def add_ssl_certs():
     include_files.append((ssl_paths.openssl_cafile, "share/ssl/cert.pem"))
 
 def add_locales():
-    add_files_by_pattern("po", "openswitcher", ".mo", recursive=True)
-
+    languages = ["en", "nl", "tr"]
+    add_files_by_pattern("share/locale", tuple(languages), "gtk30.mo", recursive=True)
+    add_files_by_pattern("share/locale", tuple(languages), "openswitcher.mo", recursive=True)
 
 # GTK
 add_gtk()

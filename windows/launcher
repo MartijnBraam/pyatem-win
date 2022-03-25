@@ -4,6 +4,7 @@ import os
 import sys
 import signal
 import gettext
+import locale
 import ctypes
 
 VERSION = '0.5.1'
@@ -16,6 +17,10 @@ import ctypes
 libintl = ctypes.cdll.LoadLibrary("libintl-8.dll")
 libintl.bindtextdomain("openswitcher".encode(), localedir.encode(sys.getfilesystemencoding()))
 libintl.bind_textdomain_codeset("openswitcher".encode(), 'UTF-8'.encode())
+    
+lang, enc = locale.getdefaultlocale()
+os.environ['LANG'] = lang
+
 gettext.install("openswitcher", localedir)
 gettext.textdomain("openswitcher")
 

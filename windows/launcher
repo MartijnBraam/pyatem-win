@@ -9,17 +9,19 @@ import ctypes
 VERSION = '0.5.1'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
+pkgdir = os.path.dirname(sys.executable)
+localedir = os.path.join(pkgdir, 'share/locale')
+
 import ctypes
 libintl = ctypes.cdll.LoadLibrary("libintl-8.dll")
-libintl.bindtextdomain("openswitcher".encode(), os.path.join(pkgdir, 'po').encode(sys.getfilesystemencoding()))
+libintl.bindtextdomain("openswitcher".encode(), localedir.encode(sys.getfilesystemencoding()))
 libintl.bind_textdomain_codeset("openswitcher".encode(), 'UTF-8'.encode())
-gettext.install("openswitcher", os.path.join(pkgdir, 'po'))
+gettext.install("openswitcher", localedir)
 
 if __name__ == '__main__':
     import gi
     from gi.repository import Gio
 
-    pkgdir = os.path.dirname(sys.executable)
     resource = Gio.Resource.load(os.path.join(pkgdir, 'atem.gresource'))
 
     resource._register()

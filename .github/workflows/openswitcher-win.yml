@@ -37,6 +37,7 @@ jobs:
             mingw-w64-x86_64-python-chardet
             mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-python-gobject
+            mingw-w64-x86_64-python-lxml
             mingw-w64-x86_64-libusb
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-libhandy

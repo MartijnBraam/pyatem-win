@@ -107,6 +107,8 @@ def add_ssl_certs():
     ssl_paths = ssl.get_default_verify_paths()
     include_files.append((ssl_paths.openssl_cafile, "share/ssl/cert.pem"))
 
+def add_locales():
+    add_files_by_pattern("po", ("openswitcher"), (".mo"), recursive=True)
 
 
 # GTK
@@ -116,6 +118,9 @@ add_themes()
 
 # SSL
 add_ssl_certs()
+
+# Locales
+add_locales()
 
 setup(
     name="openswitcher",

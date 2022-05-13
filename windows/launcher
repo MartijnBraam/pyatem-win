@@ -7,7 +7,7 @@ import gettext
 import locale
 import ctypes
 
-VERSION = '0.5.2'
+VERSION = '0.6.0'
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 pkgdir = os.path.dirname(sys.executable)

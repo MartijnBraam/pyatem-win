@@ -8,6 +8,8 @@ import tempfile
 from pkgutil import walk_packages
 from cx_Freeze import Executable, setup
 
+VERSION = "0.7.0"
+
 
 if sys.platform == "win32":
     gui_base = "Win32GUI"
@@ -126,7 +128,7 @@ add_locales()
 setup(
     name="openswitcher",
     author="Martijn Braam <martijn@brixit.nl>",
-    version="0.6.1",
+    version=VERSION,
     options={
         "build_exe": dict(
             packages=["gi"] + plugin_packages,
@@ -138,7 +140,7 @@ setup(
         "bdist_msi": dict(
             all_users=True,
             install_icon=os.path.join(src_path, "windows/openswitcher.ico"),
-            target_name="OpenSwitcher-0.6.1.msi",
+            target_name="OpenSwitcher-"+VERSION+".x86_64.msi",
             upgrade_code="{1ad65c6a-3492-4940-985f-04d11a28095e}"
         )
     },

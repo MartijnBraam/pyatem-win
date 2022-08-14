@@ -51,7 +51,7 @@ jobs:
           ls
           cd buildsrc
           echo "RELEASE_VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          echo "$(git tag -l --format="%(contents:body)" $GITHUB_REF_NAME)" > RELEASE_NOTES
+          echo '$(git tag -l --format="%(contents:body)" $GITHUB_REF_NAME)' > RELEASE_NOTES
           echo "Release notes for $GITHUB_REF_NAME:"
           cat RELEASE_NOTES
           echo "---"
@@ -81,8 +81,7 @@ jobs:
           glib-compile-schemas /mingw64/share/glib-2.0/schemas
           cp -rv ../buildsrc/windows .
           cp windows/launcher gtk_switcher/switcher-control
-          echo sed -i 's/%VERSION%/${{env.RELEASE_VERSION}}/g' gtk_switcher/switcher-control
-          sed -i 's/%VERSION%/${{github.ref}}/g' gtk_switcher/switcher-control
+          sed -i 's/%VERSION%/${{env.RELEASE_VERSION}}/g' gtk_switcher/switcher-control
           cd windows
           cp setup.template.py setup.py
           sed -i 's/%VERSION%/${{env.RELEASE_VERSION}}/g' setup.py

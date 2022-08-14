@@ -32,7 +32,6 @@ jobs:
           update: true
           install: >-
             mingw-w64-x86_64-python
-            mingw-w64-x86_64-zip
             mingw-w64-x86_64-gettext
             mingw-w64-x86_64-gspell
             mingw-w64-x86_64-gtk3
@@ -46,6 +45,7 @@ jobs:
             mingw-w64-x86_64-python-cx-freeze
             mingw-w64-x86_64-python-pywin32
             git
+            zip
 
       - name: Extract version info
         run: |

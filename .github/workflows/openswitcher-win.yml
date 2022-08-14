@@ -51,7 +51,7 @@ jobs:
           ls
           cd buildsrc
           echo "RELEASE_VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          echo '$(git tag -l --format="%(contents:body)" $GITHUB_REF_NAME)' > RELEASE_NOTES
+          echo "$(git tag -l --format='%(contents:body)' $GITHUB_REF_NAME)" > RELEASE_NOTES
           echo "Release notes for $GITHUB_REF_NAME:"
           cat RELEASE_NOTES
           echo "---"
@@ -94,11 +94,11 @@ jobs:
       - name: Archive installer artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: windows-${{ matrix.arch }}-installer
+          name: "OpenSwitcher-${{env.RELEASE_VERSION}}-installer.${{ matrix.arch }}"
           path: pyatem/windows/dist
 
       - name: Archive package artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: windows-${{ matrix.arch }}-package
+          name: "OpenSwitcher-${{env.RELEASE_VERSION}}-standalone.${{ matrix.arch }}"
           path: pyatem/windows/build/openswitcher

@@ -8,7 +8,7 @@ import tempfile
 from pkgutil import walk_packages
 from cx_Freeze import Executable, setup
 
-VERSION = "0.7.0"
+VERSION = "%VERSION%"
 
 
 if sys.platform == "win32":

@@ -140,7 +140,7 @@ setup(
         "bdist_msi": dict(
             all_users=True,
             install_icon=os.path.join(src_path, "windows/openswitcher.ico"),
-            target_name="OpenSwitcher-"+VERSION+".x86_64.msi",
+            target_name="OpenSwitcher-"+VERSION,
             upgrade_code="{1ad65c6a-3492-4940-985f-04d11a28095e}"
         )
     },

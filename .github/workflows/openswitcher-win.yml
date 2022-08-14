@@ -51,7 +51,7 @@ jobs:
           ls
           cd buildsrc
           echo "RELEASE_VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          echo "$(git tag -l --format='%(contents:body)' $GITHUB_REF_NAME)" > RELEASE_NOTES
+          echo "$(git tag -l --format='%(contents:body)' $GITHUB_REF_NAME)" > ${{github.workspace}}-RELEASE_NOTES
           echo "Release notes for $GITHUB_REF_NAME:"
           cat RELEASE_NOTES
           echo "---"
@@ -102,3 +102,11 @@ jobs:
         with:
           name: "OpenSwitcher-${{env.RELEASE_VERSION}}-standalone.${{ matrix.arch }}"
           path: pyatem/windows/build/openswitcher
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ${{github.workspace}}-RELEASE_NOTES
+          name: "OpenSwitcher ${{env.RELEASE_VERSION}}"
+          files: |
+            pyatem/windows/dist/*.msi

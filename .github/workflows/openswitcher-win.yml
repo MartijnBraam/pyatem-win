@@ -25,6 +25,10 @@ jobs:
         with:
           path: buildsrc
 
+      - name: Test
+        run: |
+          echo sed -i 's/%VERSION%/${{github.ref}}/g' gtk_switcher/switcher-control
+
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
         with:
@@ -70,6 +74,7 @@ jobs:
           glib-compile-schemas /mingw64/share/glib-2.0/schemas
           cp -rv ../buildsrc/windows .
           cp windows/launcher gtk_switcher/switcher-control
+          echo sed -i 's/%VERSION%/${{github.ref}}/g' gtk_switcher/switcher-control
           sed -i 's/%VERSION%/${{github.ref}}/g' gtk_switcher/switcher-control
           cd windows
           cp setup.template.py setup.py

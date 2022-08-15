@@ -82,6 +82,7 @@ def add_gtk():
         "cairo-",
         "GModule-",
         "Handy-1",
+        "freetype2-",
     )
     add_files_by_pattern("lib/girepository-1.0", required_typelibs, ".typelib")
 

@@ -152,7 +152,7 @@ excludes = [
 includes = [
     "gi"
 ]
-includes += list({module for module in sys.stdlib_module_names if not module.startswith("_")}).difference(excludes))
+includes += list({module for module in sys.stdlib_module_names if not module.startswith("_")}.difference(excludes))
 
 setup(
     name="openswitcher",

@@ -126,6 +126,34 @@ add_ssl_certs()
 # Locales
 add_locales()
 
+excludes = [
+        "fcntl",
+        "grp",
+        "nis",
+        "ossaudiodev",
+        "posix",
+        "pwd",
+        "readline",
+        "resource",
+        "spwd",
+        "syslog",
+        "termios",
+        "ensurepip",
+        "idlelib",
+        "pip",
+        "tkinter",
+        "turtle",
+        "turtledemo",
+        "venv",
+        "zoneinfo",
+        "pygtkcompat",
+]
+
+includes = [
+    "gi"
+]
+includes += list({module for module in sys.stdlib_module_names if not module.startswith("_")}).difference(excludes))
+
 setup(
     name="openswitcher",
     author="Martijn Braam <martijn@brixit.nl>",
@@ -133,10 +161,9 @@ setup(
     options={
         "build_exe": dict(
             packages=["gi"] + plugin_packages,
-            excludes=["pygtkcompat", "tkinter"],
+            excludes=excludes,
             include_files=include_files,
             zip_include_packages=["*"],
-            zip_exclude_packages=["pynicotine"]
         ),
         "bdist_msi": dict(
             all_users=True,

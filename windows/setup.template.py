@@ -160,8 +160,7 @@ setup(
     version=VERSION,
     options={
         "build_exe": dict(
-            packages=["gi"] + plugin_packages,
-            excludes=excludes,
+            packages=["gi", "pyatem"] + plugin_packages,
             include_files=include_files,
             zip_include_packages=["*"],
         ),

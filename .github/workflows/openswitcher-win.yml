@@ -91,13 +91,13 @@ jobs:
           mv build/exe.* build/openswitcher
 
       - name: Archive installer artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: "OpenSwitcher-${{env.RELEASE_VERSION}}-installer.${{ matrix.arch }}"
           path: pyatem/windows/dist
 
       - name: Archive package artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: "OpenSwitcher-${{env.RELEASE_VERSION}}-standalone.${{ matrix.arch }}"
           path: pyatem/windows/build/openswitcher
